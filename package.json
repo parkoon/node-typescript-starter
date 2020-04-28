@@ -4,7 +4,8 @@
   "description": "Node typescript starter project ",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "build": "rimraf ./build && tsc"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/node": "^13.13.4",
     "nodemon": "^2.0.3",
+    "rimraf": "^3.0.2",
     "ts-node": "^8.9.1",
     "typescript": "^3.8.3"
   }
