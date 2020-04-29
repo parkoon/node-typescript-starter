@@ -1,3 +1,24 @@
-node_modules/
-build/
-dist/
+*.log
+*.gz
+
+logs
+
+# API keys and secrets
+.env
+
+# Dependency directory
+node_modules
+
+# Editors
+.idea
+*.iml
+
+# OS metadata
+.DS_Store
+
+# Ignore built ts files
+dist/**/*
+
+# ignore lock
+yarn.lock
+package-lock.json
