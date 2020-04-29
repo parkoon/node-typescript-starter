@@ -1,5 +1,22 @@
-body {
-  div {
-    background: rgba($color: #000000, $alpha: 1);
-  }
-}
+@charset 'utf-8';
+
+// 1. Configuration and helpers
+@import 'abstracts/variables', 'abstracts/functions', 'abstracts/mixins';
+
+// 2. Vendors
+@import 'vendor/normalize';
+
+// 3. Base stuff
+@import 'base/base', 'base/fonts', 'base/helpers';
+
+// 4. Layout-related sections
+@import 'layouts/header', 'layouts/footer';
+
+// 5. Components
+@import 'components/button';
+
+// 6. Page-specific styles
+@import 'pages/home';
+
+// 7. Themes
+@import 'themes/default';
