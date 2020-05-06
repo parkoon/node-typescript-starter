@@ -58,6 +58,10 @@ const errorResponseProd = (err: AppException, req: Request, res: Response) => {
 };
 
 function errorMiddleware(err: AppException, req: Request, res: Response, next: NextFunction) {
+  // try catch 문으로 넘어 온 경우 status 코드가 없고 프로그래밍 오류로 간주
+  // 없을 경우 500 에러로 처리
+  err.status = err.status || 500;
+
   // PRODUCTION 과 DEVELOPMENT 에러응답 구분
   process.env.NODE_ENV === 'development' ? errorResponseDev(err, req, res) : errorResponseProd(err, req, res);
 }
