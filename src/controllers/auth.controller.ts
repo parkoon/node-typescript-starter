@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { DataStoreInToken, Token } from '../interfaces/auth.interface';
 import { User } from '../interfaces/user.interface';
+import { RequestWithUser } from '../interfaces/http.interface';
 
 export const signToken = (data: DataStoreInToken): Token => {
   const expiresIn = parseInt(process.env.JWT_EXPIRES_IN, 10);
@@ -15,10 +16,10 @@ export const signToken = (data: DataStoreInToken): Token => {
 };
 
 const createAndSendToken = (user: User, status: number, res: Response) => {
-  const token = signToken({ id: user.email, name: user.name });
+  const { token, expiresIn } = signToken({ id: user.email, name: user.name });
 
   const cookieOptions = {
-    maxAge: token.expiresIn,
+    maxAge: expiresIn,
     httpOnly: true,
     secure: false,
   };
@@ -38,7 +39,7 @@ const createAndSendToken = (user: User, status: number, res: Response) => {
   });
 };
 
-export const login = async (req: Request, res: Response, next: NextFunction) => {
+export const login = (req: Request, res: Response, next: NextFunction) => {
   const token = signToken({ id: 'parkoon', name: 'park jong hyeok' });
 
   const user: User = {
