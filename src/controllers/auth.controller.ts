@@ -39,6 +39,17 @@ const createAndSendToken = (user: User, status: number, res: Response) => {
   });
 };
 
+export const logout = (req: Request, res: Response, next: NextFunction) => {
+  // 1) 쿠키 제거
+  res.cookie('jwt', 'logout', {
+    maxAge: 0,
+    httpOnly: true,
+  });
+  res.status(200).json({
+    status: 'success',
+  });
+};
+
 export const login = (req: Request, res: Response, next: NextFunction) => {
   const token = signToken({ id: 'parkoon', name: 'park jong hyeok' });
 
