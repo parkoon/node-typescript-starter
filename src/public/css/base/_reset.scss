@@ -1,107 +1,129 @@
-/**
- * Defaults and additional resets for elements
- */
-html {
-  // Enable border-box for elements
-  box-sizing: border-box;
-  font-size: 100%;
-}
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
 
-body {
-  // optimize font rendering
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-*,
-*:after,
-*:before {
-  box-sizing: inherit;
-}
-
-// Remove text-shadow in selection highlight
-::selection {
-  background: #b3d4fc;
-  text-shadow: none;
-}
-
-// Avoid link underline
-a {
-  text-decoration: none;
-
-  // Remove styling of telephone links
-  &[href^='tel:'] {
-    color: $text-color;
-    cursor: default;
-  }
-}
-
-// Reset button styling
-button,
-input[type='button'] {
-  outline: 0;
-  -webkit-appearance: none;
-  border-radius: 0;
-  cursor: default;
-}
-
-input[type='text'],
-input[type='email'],
-input[type='password'],
-input[type='search'],
-input[type='number'],
-input[type='tel'],
-input[type='url'],
-textarea {
-  @extend button;
-  // Set font size to 16px to avoid iOS zooming on focus
-  font-size: 16px;
-}
-
-// Remove default fieldset styles
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-
-// Allow only vertical resize of textareas
-textarea {
-  resize: vertical;
-}
-
-// Remove gap beneath elements
-audio,
-canvas,
+html,
+body,
+div,
+span,
+applet,
+object,
 iframe,
-img,
-svg,
-video {
-  vertical-align: middle;
-}
-
-// Focus on semantic, not default style
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
-  font-size: $font-base-size + 2px;
-}
-
-// A better looking default horizontal rule
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
-  padding: 0;
-}
-
-// Reset figure spacing
-figure {
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
