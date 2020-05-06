@@ -1,0 +1,51 @@
+// ----------------------------------------------------------------------
+
+  // Rounded Corners
+
+// ----------------------------------------------------------------------
+
+ // example: @include roundedCorners(10);
+
+@mixin roundedCorners($size) {
+  border-radius: $size + px;
+}
+
+// Rounded Corners Top Only
+@mixin roundedTop($size) {
+  border-radius: $size + px $size + px 0 0;
+}
+
+// Rounded Corner Top Left Only
+@mixin roundedTopLeft($size) {
+  border-radius: $size + px 0 0 0;
+}
+
+// Rounded Corner Top Right Only
+@mixin roundedTopRight($size) {
+  border-radius: 0 $size + px 0 0;
+}
+
+// Rounded Corners Bottom Only
+@mixin roundedBottom($size) {
+  border-radius: 0 0 $size + px $size + px;
+}
+
+// Rounded Corner Bottom Left Only
+@mixin roundedBottomLeft($size) {
+  border-radius: 0 0 0 $size + px;
+}
+
+// Rounded Corner Bottom Right Only
+@mixin roundedBottomRight($size) {
+  border-radius: 0 0 $size + px 0;
+}
+
+// Rounded Corners Left Only
+@mixin roundedLeft($size) {
+  border-radius: $size + px 0 0 $size + px;
+}
+
+// Rounded Corners Right Only
+@mixin roundedRight($size) {
+  border-radius: 0 $size + px $size + px 0;
+}

@@ -12,11 +12,11 @@
 }
 
 /**
-   * Main content containers
-   * 1. Make the container full-width with a maximum width
-   * 2. Center it in the viewport
-   * 3. Leave some space on the edges, especially valuable on small screens
-   */
+ * Main content containers
+ * 1. Make the container full-width with a maximum width
+ * 2. Center it in the viewport
+ * 3. Leave some space on the edges, especially valuable on small screens
+ */
 .container {
   max-width: $max-width; /* 1 */
   margin-left: auto; /* 2 */
@@ -27,10 +27,10 @@
 }
 
 /**
-   * Hide text while making it readable for screen readers
-   * 1. Needed in WebKit-based browsers because of an implementation bug;
-   *    See: https://code.google.com/p/chromium/issues/detail?id=457146
-   */
+ * Hide text while making it readable for screen readers
+ * 1. Needed in WebKit-based browsers because of an implementation bug;
+ *    See: https://code.google.com/p/chromium/issues/detail?id=457146
+ */
 .hide-text {
   overflow: hidden;
   padding: 0; /* 1 */
@@ -39,10 +39,10 @@
 }
 
 /**
-   * Hide element while making it readable for screen readers
-   * Shamelessly borrowed from HTML5Boilerplate:
-   * https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css#L119-L133
-   */
+ * Hide element while making it readable for screen readers
+ * Shamelessly borrowed from HTML5Boilerplate:
+ * https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css#L119-L133
+ */
 .visually-hidden {
   border: 0;
   clip: rect(0 0 0 0);

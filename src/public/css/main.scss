@@ -1,13 +1,23 @@
 @charset 'utf-8';
+// ref. https://sass-guidelin.es/ko/#section
+
+/*
+    1. abstracts
+    2. vendor
+    3. base
+    4. layout
+    5. components
+    6. pages
+    7. themes
+*/
 
 // 1. Configuration and helpers
-@import 'abstracts/variables', 'abstracts/functions', 'abstracts/mixins';
+@import 'utils/variables', 'utils/functions', 'utils/mixins', 'utils/helpers';
 
 // 2. Vendors
-@import 'vendor/normalize';
 
 // 3. Base stuff
-@import 'base/base', 'base/fonts', 'base/helpers';
+@import 'base/base', 'base/fonts', 'base/reset';
 
 // 4. Layout-related sections
 @import 'layouts/header', 'layouts/footer';
