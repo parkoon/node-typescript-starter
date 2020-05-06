@@ -12,6 +12,7 @@ import compression from 'compression'
 // Router
 import viewRouter from './routes/view.route'
 import userRouter from './routes/user.route'
+import errorMiddleware from './middleware/error.middleware'
 
 const app = express()
 app.use(express.static(path.join(__dirname, 'public')))
@@ -50,8 +51,6 @@ app.use(cors())
 app.use('/', viewRouter)
 app.use('/api/v1/users', userRouter)
 
-app.use((req, res, next) => {
-  console.log('error routing')
-})
+app.use(errorMiddleware)
 
 export default app
