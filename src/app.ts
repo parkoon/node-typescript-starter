@@ -24,7 +24,7 @@ app.engine(
   })
 )
 app.set('view engine', 'hbs')
-app.set('port', process.env.PORT || 3000)
+app.set('port', process.env.PORT || 3007)
 
 // SET MIDDLEWARE
 process.env.NODE_ENV === 'development' && app.use(morgan('dev'))
