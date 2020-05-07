@@ -1,1 +1,3 @@
-console.log('client side javascript')
+const loginBtn = document.querySelector('.menu__login');
+
+loginBtn.addEventListener('click', (e) => {});

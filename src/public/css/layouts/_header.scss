@@ -1,0 +1,24 @@
+.header {
+  width: 100%;
+  height: 52px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #34495e;
+
+  &__menu {
+    float: right;
+    line-height: 52px;
+    margin-right: 32px;
+    color: #fff;
+
+    li {
+      display: inline-block;
+      margin-right: 12px;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+}
