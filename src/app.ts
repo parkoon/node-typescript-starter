@@ -24,6 +24,7 @@ app.engine(
     extname: 'hbs',
   })
 );
+app.set('views', './dist/views');
 app.set('view engine', 'hbs');
 app.set('port', process.env.PORT || 3000);
 
