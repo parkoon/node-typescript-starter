@@ -4,16 +4,13 @@
   "description": "Node typescript starter project ",
   "main": "server.js",
   "scripts": {
-    "dev": " concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch:public\" \"npm run watch:ts\" \"npm run watch:node\"",
-    "build": "rimraf ./dist && npm run build:ts && npm run build:sass && npm run cp:statics",
-    "start": "npm run build && NODE_ENV=production node dist/server.js",
-    "watch:ts": "tsc -w",
-    "watch:node": "NODE_ENV=development nodemon --delay 1500ms dist/server.js",
-    "watch:public": " webpack -w --env.NODE_ENV=local --env.production --progress",
-    "build:ts": "tsc",
-    "build:sass": "node-sass src/public/css/main.scss dist/public/css/main.css",
-    "cp:statics": "ts-node copyStaticFiles",
-    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix"
+    "dev": "concurrently \"npm run dev:fe\" \"npm run dev:be\"",
+    "build": "npm run build:fe && npm run build:be",
+    "start": "NODE_ENV=production node dist/server.js",
+    "dev:fe": "webpack -w --env.NODE_ENV=development",
+    "dev:be": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"tsc -w\" \"NODE_ENV=development nodemon --delay 1500ms dist/server.js\"",
+    "build:fe": "webpack --env.NODE_ENV=production --progress",
+    "build:be": "tsc"
   },
   "repository": {
     "type": "git",
@@ -43,6 +40,7 @@
     "@types/node": "^13.13.4",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
+    "clean-webpack-plugin": "^3.0.0",
     "concurrently": "^5.2.0",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.5.3",

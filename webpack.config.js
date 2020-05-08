@@ -2,17 +2,17 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-module.exports = (env) => {
-  console.log(env);
+module.exports = ({ NODE_ENV }) => {
+  console.log(NODE_ENV);
+  const isDev = NODE_ENV === 'development';
   return {
-    //   mode: process.env.NODE_ENV === 'development' ? 'development' : 'production', // "production" | "development" | "none"
-    mode: 'production', // "production" | "development" | "none"
-    devtool: 'eval', // source-map   hidden-source-map
+    mode: isDev ? 'development' : 'production',
+    devtool: isDev ? 'eval' : 'source-map',
     entry: {
       main: './src/public/js/main.ts',
     },
-    //   watch: true,
     target: 'node',
     output: {
       // publicPath: '',
@@ -28,13 +28,7 @@ module.exports = (env) => {
         },
         {
           test: /\.(sa|sc|c)ss$/,
-          use: [
-            /* devMode ? 'style-loader' : */
-            //   'style-loader',
-            MiniCssExtractPlugin.loader,
-            'css-loader',
-            'sass-loader',
-          ],
+          use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
         },
         {
           test: /\.(png|jpe?g|gif|svg|ico)$/,
@@ -54,6 +48,7 @@ module.exports = (env) => {
       extensions: ['.ts', '.js', '.scss', '.css'],
     },
     plugins: [
+      new CleanWebpackPlugin(),
       new MiniCssExtractPlugin({
         filename: 'css/[name].css',
         chunkFilename: 'css/[id].css',
@@ -65,11 +60,11 @@ module.exports = (env) => {
           from: '**/*',
           to: './resources',
         },
-        //   {
-        //     context: './views/',
-        //     from: '**/*',
-        //     to: './views',
-        //   },
+        {
+          context: './views/',
+          from: '**/*',
+          to: './views',
+        },
       ]),
     ],
   };
