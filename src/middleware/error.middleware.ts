@@ -1,7 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import AppException from '../exceptions/app.exception';
+import { AppRequest } from '../interfaces/RequestInterface';
 
-const errorResponseDev = (err: AppException, req: Request, res: Response) => {
+const errorResponseDev = (err: AppException, req: AppRequest, res: Response) => {
   // Handling error about API
   if (req.originalUrl.startsWith('/api')) {
     return res.status(err.status).json({
@@ -18,7 +19,7 @@ const errorResponseDev = (err: AppException, req: Request, res: Response) => {
     message: err.message,
   });
 };
-const errorResponseProd = (err: AppException, req: Request, res: Response) => {
+const errorResponseProd = (err: AppException, req: AppRequest, res: Response) => {
   // Handling error about API
   if (req.originalUrl.startsWith('/api')) {
     // Operation 에러 일 경우
@@ -57,7 +58,7 @@ const errorResponseProd = (err: AppException, req: Request, res: Response) => {
   });
 };
 
-function errorMiddleware(err: AppException, req: Request, res: Response, next: NextFunction) {
+function errorMiddleware(err: AppException, req: AppRequest, res: Response, next: NextFunction) {
   // try catch 문으로 넘어 온 경우 status 코드가 없고 프로그래밍 오류로 간주
   // 없을 경우 500 에러로 처리
   err.status = err.status || 500;

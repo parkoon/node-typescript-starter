@@ -1,13 +1,14 @@
-import { Response, NextFunction, Request } from 'express';
+import { Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 import AppException from '../exceptions/app.exception';
 import { DataStoreInToken, UserModel } from '../models/AuthModel';
+import { AppRequest } from '../interfaces/RequestInterface';
 
 /**
  * API 접근을 막는 미들웨어
  */
-export const protect = (req: Request, res: Response, next: NextFunction) => {
+export const protect = (req: AppRequest, res: Response, next: NextFunction) => {
   // 1) header 또는 cookie에 있는 토큰 가져오기
   let token: string | undefined;
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -42,7 +43,7 @@ export const protect = (req: Request, res: Response, next: NextFunction) => {
     password: '1231@123123.com',
   };
 
-  req.user = currentUser;
+  // req.user = currentUser;
   res.locals.user = currentUser;
 
   next();
@@ -53,7 +54,7 @@ export const protect = (req: Request, res: Response, next: NextFunction) => {
  * 해당 미들웨어가 적용되어 있어도, 페이지 접근은 가능
  * protect 미들웨어와 구분하여 사용
  */
-export const isLoggedIn = (req: Request, res: Response, next: NextFunction) => {
+export const isLoggedIn = (req: AppRequest, res: Response, next: NextFunction) => {
   console.log('is logged in middleware');
   console.log(req.cookies);
   const token = req.cookies.jwt;
