@@ -1,7 +1,7 @@
 {
   "name": "node-typescript-starter",
   "version": "1.0.0",
-  "description": "Node typescript starter project ",
+  "description": "Boilerplate to quick-start Node.js development in TypeScript.",
   "main": "server.js",
   "scripts": {
     "dev": "concurrently \"webpack -w --env.NODE_ENV=development\" \"NODE_ENV=development nodemon\"",
