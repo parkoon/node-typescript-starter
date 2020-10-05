@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-import { UserModel, DataStoreInToken, Token } from '../models/AuthModel';
+import { UserModel, DataStoreInToken, Token } from '../models/auth.model';
 
 export const signToken = (data: DataStoreInToken): Token => {
   const expiresIn = parseInt(process.env.JWT_EXPIRES_IN, 10);

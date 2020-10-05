@@ -2,8 +2,8 @@ import { Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 import AppException from '../exceptions/app.exception';
-import { DataStoreInToken, UserModel } from '../models/AuthModel';
-import { AppRequest } from '../interfaces/RequestInterface';
+import { DataStoreInToken, UserModel } from '../models/auth.model';
+import { AppRequest } from '../interfaces/req.interface';
 
 /**
  * API 접근을 막는 미들웨어

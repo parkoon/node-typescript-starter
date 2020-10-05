@@ -1,6 +1,6 @@
 import { Response, NextFunction } from 'express';
 import AppException from '../exceptions/app.exception';
-import { AppRequest } from '../interfaces/RequestInterface';
+import { AppRequest } from '../interfaces/req.interface';
 
 const errorResponseDev = (err: AppException, req: AppRequest, res: Response) => {
   // Handling error about API

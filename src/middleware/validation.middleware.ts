@@ -2,7 +2,7 @@ import { Response, NextFunction } from 'express';
 import { plainToClass } from 'class-transformer';
 import { validateOrReject, ValidationError } from 'class-validator';
 import AppException from '../exceptions/app.exception';
-import { AppRequest } from '../interfaces/RequestInterface';
+import { AppRequest } from '../interfaces/req.interface';
 
 // ref. https://wanago.io/2018/12/17/typescript-express-error-handling-validation/
 export const validationMiddleware = (type: any) => async (req: AppRequest, res: Response, next: NextFunction) => {
