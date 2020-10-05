@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"webpack -w --env.NODE_ENV=development\" \"NODE_ENV=development nodemon\"",
     "build": "concurrently \"webpack --env.NODE_ENV=production --progress\" \"tsc\"",
-    "start": "NODE_ENV=production node build/server.js",
+    "start": "NODE_ENV=production node build/src/server.js",
     "clean": "rimraf build"
   },
   "repository": {
@@ -33,6 +33,7 @@
     "@types/helmet": "0.0.46",
     "@types/jsonwebtoken": "^8.3.9",
     "@types/lusca": "^1.6.1",
+    "@types/module-alias": "^2.0.0",
     "@types/morgan": "^1.9.0",
     "@types/node": "^13.13.4",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
@@ -74,6 +75,7 @@
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "lusca": "^1.6.1",
+    "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
     "shelljs": "^0.8.4",
     "xss-clean": "^0.1.1"
