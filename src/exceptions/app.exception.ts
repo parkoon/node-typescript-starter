@@ -1,11 +1,21 @@
-import HttpException from './http.exception';
+interface Errors {
+  errorField: string;
+  errorCode: string;
+  errorMessage: string;
+}
+class AppException extends Error {
+  public status: number;
+  public message: string;
+  public errors?: Errors[];
 
-class AppException extends HttpException {
-  public isOperational: boolean;
+  constructor(status: number, message: string, errors?: Errors[]) {
+    super(message);
 
-  constructor(status: number, message: string) {
-    super(status, message);
-    this.isOperational = true;
+    this.status = status;
+    this.message = message;
+    this.errors = errors;
+
+    Error.captureStackTrace(this, this.constructor);
   }
 }
 
