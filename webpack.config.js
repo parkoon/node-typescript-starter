@@ -16,7 +16,7 @@ module.exports = ({ NODE_ENV }) => {
     target: 'node',
     output: {
       // publicPath: '',
-      path: path.join(__dirname, './dist/public'),
+      path: path.join(__dirname, './build/public'),
       filename: '[name].js',
     },
     module: {

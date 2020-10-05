@@ -18,6 +18,7 @@ node_modules
 
 # Ignore built ts files
 dist/**/*
+build/**/*
 
 # ignore lock
 yarn.lock
