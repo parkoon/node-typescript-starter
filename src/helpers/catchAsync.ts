@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { RequestWithUser } from '../interfaces/http.interface';
 import AppException from '../exceptions/app.exception';
 
 /**
@@ -10,7 +9,7 @@ import AppException from '../exceptions/app.exception';
  * 실행 할 함수를 fn으로 받음
  */
 export default (fn: Function) => {
-  return (req: Request | RequestWithUser, res: Response, next: NextFunction) => {
+  return (req: Request, res: Response, next: NextFunction) => {
     fn(req, res, next).catch((err: AppException) => next(err));
   };
 };
