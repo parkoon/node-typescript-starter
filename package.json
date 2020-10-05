@@ -4,13 +4,9 @@
   "description": "Node typescript starter project ",
   "main": "server.js",
   "scripts": {
-    "dev": "concurrently \"npm run dev:fe\" \"npm run dev:be\"",
-    "build": "npm run build:fe && npm run build:be",
-    "start": "NODE_ENV=production node dist/server.js",
-    "dev:fe": "webpack -w --env.NODE_ENV=development",
-    "dev:be": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"tsc -w\" \"NODE_ENV=development nodemon --delay 1500ms dist/server.js\"",
-    "build:fe": "webpack --env.NODE_ENV=production --progress",
-    "build:be": "tsc"
+    "dev": "concurrently \"webpack -w --env.NODE_ENV=development\" \"NODE_ENV=development nodemon\"",
+    "build": "concurrently \"webpack --env.NODE_ENV=production --progress\" \"tsc\"",
+    "start": "NODE_ENV=production node dist/server.js"
   },
   "repository": {
     "type": "git",
