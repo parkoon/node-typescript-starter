@@ -9,35 +9,38 @@ import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import compression from 'compression';
 
+import '../moduleAlias';
+
 // Router
-import viewRouter from './routes/view.route';
-import userRouter from './routes/user.route';
-import errorMiddleware from './middleware/error.middleware';
+import viewRouter from '@Routes/view.route';
+import userRouter from '@Routes/user.route';
+import errorMiddleware from '@Middleware/error.middleware';
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 
 // SET VIEW ENGINE
 app.engine(
-  'hbs',
-  exphbs({
-    extname: 'hbs',
-  })
+    'hbs',
+    exphbs({
+        extname: 'hbs',
+    })
 );
+app.set('views', process.env.NODE_ENV === 'development' ? 'views' : 'build/public/views');
 app.set('view engine', 'hbs');
 app.set('port', process.env.PORT || 3000);
 
 // SET MIDDLEWARE
 process.env.NODE_ENV === 'development' && app.use(morgan('dev'));
 process.env.NODE_ENV === 'production' &&
-  app.use(
-    '/api',
-    rateLimit({
-      max: 3,
-      windowMs: 60 * 60 * 100,
-      message: 'Too many request from this IP, please try again in an hour',
-    })
-  );
+    app.use(
+        '/api',
+        rateLimit({
+            max: 3,
+            windowMs: 60 * 60 * 100,
+            message: 'Too many request from this IP, please try again in an hour',
+        })
+    );
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

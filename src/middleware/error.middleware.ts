@@ -1,69 +1,54 @@
+// tslint:disable: no-parameter-reassignment
+
 import { Request, Response, NextFunction } from 'express';
-import AppException from '../exceptions/app.exception';
+import { AxiosError } from 'axios';
 
-const errorResponseDev = (err: AppException, req: Request, res: Response) => {
-  // Handling error about API
+// import AppException from '../exceptions/app.exception';
+
+import AppException from '@Exceptions/app.exception';
+
+const handleAppError = (error: AppException, req: Request, res: Response) => {
+  console.log('## Catch App error in error middleware ', error.message);
+
   if (req.originalUrl.startsWith('/api')) {
-    return res.status(err.status).json({
-      err: err,
-      stack: err.stack,
-      status: err.status,
-      message: err.message,
+    return res.status(error.status).json({
+      errors: Array.isArray(error.errors) ? error.errors : undefined,
+      status: error.status,
+      message: error.message,
     });
   }
 
-  // Handling error about RENDERING
-  return res.status(err.status).render('error', {
-    title: 'Something went wrong!',
-    message: err.message,
-  });
-};
-const errorResponseProd = (err: AppException, req: Request, res: Response) => {
-  // Handling error about API
-  if (req.originalUrl.startsWith('/api')) {
-    // Operation 에러 일 경우
-    if (err.isOperational) {
-      return res.status(err.status).json({
-        status: err.status,
-        message: err.message,
-      });
-    }
-    // Programming 에러 일 경우
-    // 1) 로깅
-    console.error('ERROR !!', err);
-
-    // 2) 에러 메세지 전송
-    return res.status(500).json({
-      status: 'error',
-      message: 'Someting went very wrong!',
-    });
-  }
-  // Handling error about RENDERING
-  // Operation 에러 일 경우
-  if (err.isOperational) {
-    return res.status(err.status).render('error', {
-      title: 'Something went wrong!',
-      message: err.message,
-    });
-  }
-  // Programming 에러 일 경우
-  // 1) 로깅
-  console.error('ERROR !!', err);
-
-  // RENDERED WEBSITE
-  return res.status(err.status).render('error', {
+  return res.status(error.status).render('error', {
     title: 'Something went wrong!',
     message: 'Please try again later',
   });
 };
 
-function errorMiddleware(err: AppException, req: Request, res: Response, next: NextFunction) {
-  // try catch 문으로 넘어 온 경우 status 코드가 없고 프로그래밍 오류로 간주
-  // 없을 경우 500 에러로 처리
-  err.status = err.status || 500;
+const handleAxiosError = (error: AxiosError, res: Response) => {
+  console.log('## Catch Axios error in error middleware ', error.response && error.response.data);
+  res.status(error.response ? error.response.status : 500).json({
+    errors: error.response ? error.response.data : undefined,
+    status: error.response ? error.response.status : 500,
+    message: error.message,
+  });
+};
 
-  // PRODUCTION 과 DEVELOPMENT 에러응답 구분
-  process.env.NODE_ENV === 'development' ? errorResponseDev(err, req, res) : errorResponseProd(err, req, res);
+const handleJWTError = () => new AppException(401, 'Invalid Token. Please log in again!');
+
+const handleJWTExpiredError = () => new AppException(401, 'Your token has expired! Please log in again');
+
+function errorMiddleware(error: AppException, req: Request, res: Response, next: NextFunction) {
+  if ((error as any).isAxiosError) {
+    const axiosError = error as any;
+    return handleAxiosError(axiosError, res);
+  }
+
+  error.status = error.status || 500;
+
+  if (error.name === 'JsonWebTokenError') error = handleJWTError();
+  if (error.name === 'TokenExpiredError') error = handleJWTExpiredError();
+
+  handleAppError(error, req, res);
 }
 
 export default errorMiddleware;

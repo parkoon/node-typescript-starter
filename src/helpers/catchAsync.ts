@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { RequestWithUser } from '../interfaces/http.interface';
-import AppException from '../exceptions/app.exception';
+import AppException from '@Exceptions/app.exception';
 
 /**
  * async / await 의 try catch 반복 작업을 줄여주는 헬퍼
@@ -10,7 +9,7 @@ import AppException from '../exceptions/app.exception';
  * 실행 할 함수를 fn으로 받음
  */
 export default (fn: Function) => {
-  return (req: Request | RequestWithUser, res: Response, next: NextFunction) => {
-    fn(req, res, next).catch((err: AppException) => next(err));
-  };
+    return (req: Request, res: Response, next: NextFunction) => {
+        fn(req, res, next).catch((err: AppException) => next(err));
+    };
 };
