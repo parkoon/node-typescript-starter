@@ -1,5 +1,5 @@
 import express from 'express';
-import * as viewController from '../controllers/view.controller';
+import * as viewController from '@Controllers/view.controller';
 
 const router = express.Router();
 

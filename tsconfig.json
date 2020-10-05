@@ -19,21 +19,29 @@
 // }
 
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "es6",
-    "noImplicitAny": true,
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "outDir": "build",
-    "baseUrl": ".",
-    "experimentalDecorators": true,
-    "paths": {
-      "*": ["node_modules/*", "src/types/*"]
-    }
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "src/public/*"]
+    "compilerOptions": {
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "target": "es6",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "build",
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"],
+            "@Commands/*": ["src/commands/*"],
+            "@Controllers/*": ["src/controllers/*"],
+            "@Exceptions/*": ["src/exceptions/*"],
+            "@Helpers/*": ["src/helpers/*"],
+            "@Interfaces/*": ["src/interfaces/*"],
+            "@Middleware/*": ["src/middleware/*"],
+            "@Models/*": ["src/models/*"],
+            "@Routes/*": ["src/routes/*"]
+        }
+    },
+    "include": ["src/**/*", "moduleAlias.ts"],
+    "exclude": ["node_modules", "src/public/*"]
 }

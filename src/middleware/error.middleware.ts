@@ -3,7 +3,9 @@
 import { Request, Response, NextFunction } from 'express';
 import { AxiosError } from 'axios';
 
-import AppException from '../exceptions/app.exception';
+// import AppException from '../exceptions/app.exception';
+
+import AppException from '@Exceptions/app.exception';
 
 const handleAppError = (error: AppException, req: Request, res: Response) => {
   console.log('## Catch App error in error middleware ', error.message);

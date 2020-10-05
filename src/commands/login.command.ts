@@ -1,15 +1,15 @@
 import { IsEmail, IsString, MinLength, MaxLength } from 'class-validator';
 
 export class LoginCommand {
-  @IsEmail()
-  public email: string;
+    @IsEmail()
+    public email: string;
 
-  @IsString()
-  @MinLength(10, {
-    message: 'Password is too short',
-  })
-  @MaxLength(15, {
-    message: 'Password is too long',
-  })
-  public password: string;
+    @IsString()
+    @MinLength(10, {
+        message: 'Password is too short',
+    })
+    @MaxLength(15, {
+        message: 'Password is too long',
+    })
+    public password: string;
 }
