@@ -1,12 +1,37 @@
+import os from 'os';
+import cluster from 'cluster';
+import { Server } from 'http';
 import dotenv from 'dotenv';
+
 import app from './app';
 
 dotenv.config();
 
-const server = app.listen(app.get('port'), () => {
-    console.log('  App is running at http://localhost:%d in %s mode', app.get('port'), app.get('env'));
-    console.log('  Press CTRL-C to stop\n');
-});
+let server: Server;
+
+const clusterMode = false;
+
+if (clusterMode && cluster.isMaster) {
+    const workers = os.cpus();
+
+    console.log('Master cluster setting up ' + workers.length + ' workers...');
+
+    workers.forEach(() => cluster.fork());
+
+    cluster.on('online', (worker) => {
+        console.log('Worker ' + worker.process.pid + ' is online');
+    });
+
+    cluster.on('exit', (worker, code, signal) => {
+        console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal);
+        console.log('Starting a new worker');
+        cluster.fork();
+    });
+} else {
+    server = app.listen(app.get('port'), () => {
+        console.log('Process ' + process.pid + ' is listening to all incoming requests at' + app.get('port') + 'port');
+    });
+}
 
 // promise 에서 catch로 에러 처리를 하지 않았을 때 방생하는 요류
 process.on('unhandledRejection', () => {
