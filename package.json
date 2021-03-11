@@ -62,7 +62,7 @@
         "@types/express": "^4.17.6",
         "@types/express-handlebars": "^3.1.0",
         "@types/shelljs": "^0.8.7",
-        "axios": "^0.20.0",
+        "axios": "^0.21.1",
         "class-transformer": ">=0.3.1",
         "class-validator": "^0.12.2",
         "cluster": "^0.7.7",
